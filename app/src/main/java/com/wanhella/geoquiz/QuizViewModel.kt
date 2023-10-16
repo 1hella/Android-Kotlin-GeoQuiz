@@ -17,7 +17,7 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
     )
 
     private var currentIndex: Int
-        get() = savedStateHandle.get(CURRENT_INDEX_KEY) ?: 0
+        get() = savedStateHandle[CURRENT_INDEX_KEY] ?: 0
         set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
 
 
