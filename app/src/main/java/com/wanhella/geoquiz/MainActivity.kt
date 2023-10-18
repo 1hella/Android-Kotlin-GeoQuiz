@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
-
+        quizViewModel.currentQuestionUserAnswer = userAnswer
         val messageResId = when {
             quizViewModel.isCheater -> R.string.judgment_toast
             userAnswer == correctAnswer -> R.string.correct_toast
@@ -90,6 +90,19 @@ class MainActivity : AppCompatActivity() {
 
         Snackbar.make(binding.mainLayout, messageResId, Snackbar.LENGTH_SHORT)
             .show()
+
+        if (quizViewModel.numQuestionsAnswered == quizViewModel.numQuestions) {
+            val numCorrect = quizViewModel.numQuestionsCorrect
+            val percentage = numCorrect.toFloat() / quizViewModel.numQuestions * 100
+            val totalMessage = getString(
+                R.string.percentage_toast,
+                numCorrect,
+                quizViewModel.numQuestions,
+                percentage
+            )
+            Snackbar.make(binding.mainLayout, totalMessage, Snackbar.LENGTH_LONG)
+                .show()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

@@ -16,4 +16,5 @@
     <string name="cheat_button">Cheat!</string>
     <string name="judgment_toast">Cheating is wrong.</string>
     <string name="previous_button">Previous</string>
+    <string name="percentage_toast">You scored %1$d out of %2$d. %3$.1f%%.</string>
 </resources>

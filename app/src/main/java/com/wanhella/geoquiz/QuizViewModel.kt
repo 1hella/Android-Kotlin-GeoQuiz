@@ -17,12 +17,17 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         Question(R.string.question_asia, true)
     )
 
+    private var userAnswers = arrayOf<Boolean?>(null, null, null, null, null, null)
+
     private var currentIndex: Int
         get() = savedStateHandle[CURRENT_INDEX_KEY] ?: 0
         set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
 
+    val numQuestions: Int
+        get() = questionBank.size
+
     var isCheater: Boolean
-        get() = savedStateHandle.get(IS_CHEATER_KEY) ?: false
+        get() = savedStateHandle[IS_CHEATER_KEY] ?: false
         set(value) = savedStateHandle.set(IS_CHEATER_KEY, value)
 
     val currentQuestionAnswer: Boolean
@@ -30,6 +35,30 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
 
     val currentQuestionText: Int
         get() = questionBank[currentIndex].textResId
+
+    val numQuestionsAnswered: Int
+        get() {
+            var count = 0
+            for (i in userAnswers) {
+                if (i != null) {
+                    count += 1
+                }
+            }
+            return count
+        }
+    val numQuestionsCorrect: Int
+        get() {
+            var numCorrect = 0
+            for (i in 0 until numQuestions) {
+                if (questionBank[i].answer == userAnswers[i]) {
+                    numCorrect += 1
+                }
+            }
+            return numCorrect
+        }
+    var currentQuestionUserAnswer: Boolean?
+        get() = userAnswers[currentIndex]
+        set(value) = userAnswers.set(currentIndex, value)
 
     fun moveToNext() {
         currentIndex = (currentIndex + 1) % questionBank.size
