@@ -52,6 +52,16 @@ class MainActivity : AppCompatActivity() {
             updateQuestion()
         }
 
+        binding.previousButton.setOnClickListener { view: View ->
+            quizViewModel.moveToPrevious()
+            updateQuestion()
+        }
+
+        binding.questionTextView.setOnClickListener { view: View ->
+            quizViewModel.moveToNext()
+            updateQuestion()
+        }
+
         binding.cheatButton.setOnClickListener {
             val answerIsTrue = quizViewModel.currentQuestionAnswer
             val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
