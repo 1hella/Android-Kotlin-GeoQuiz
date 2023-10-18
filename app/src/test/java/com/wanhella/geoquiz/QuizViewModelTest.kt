@@ -24,6 +24,15 @@ class QuizViewModelTest {
     }
 
     @Test
+    fun wrapsBehindQuestionBank() {
+        val savedStateHandle = SavedStateHandle()
+        val quizViewModel = QuizViewModel(savedStateHandle)
+        assertEquals(R.string.question_australia, quizViewModel.currentQuestionText)
+        quizViewModel.moveToPrevious()
+        assertEquals(R.string.question_asia, quizViewModel.currentQuestionText)
+    }
+
+    @Test
     fun answerIsTrueOrFalse() {
         val savedStateHandle = SavedStateHandle()
         val quizViewModel = QuizViewModel(savedStateHandle)

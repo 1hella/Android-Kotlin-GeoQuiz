@@ -43,6 +43,13 @@ class MainActivityTest {
     }
 
     @Test
+    fun showsLastQuestionAfterPreviousPress() {
+        onView(withId(R.id.previous_button)).perform(click())
+        onView(withId(R.id.question_text_view))
+            .check(matches(withText(R.string.question_asia)))
+    }
+
+    @Test
     fun handlesActivityRecreation() {
         onView(withId(R.id.next_button)).perform(click())
         scenario.recreate()
