@@ -7,11 +7,11 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.wanhella.geoquiz.databinding.ActivityMainBinding
 
 private const val TAG = "MainActivity"
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             else -> R.string.incorrect_toast
         }
 
-        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
+        Snackbar.make(binding.mainLayout, messageResId, Snackbar.LENGTH_SHORT)
             .show()
     }
 

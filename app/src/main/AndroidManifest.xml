@@ -25,7 +25,7 @@
         <activity
             android:name=".CheatActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light"></activity>
+            android:theme="@style/Theme.AppCompat.Light" />
     </application>
 
 </manifest>
