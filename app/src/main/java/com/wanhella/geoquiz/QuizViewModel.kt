@@ -56,6 +56,7 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
             }
             return numCorrect
         }
+
     var currentQuestionUserAnswer: Boolean?
         get() = userAnswers[currentIndex]
         set(value) = userAnswers.set(currentIndex, value)

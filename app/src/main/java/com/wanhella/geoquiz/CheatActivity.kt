@@ -3,6 +3,7 @@ package com.wanhella.geoquiz
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.wanhella.geoquiz.databinding.ActivityCheatBinding
@@ -28,6 +29,7 @@ class CheatActivity : AppCompatActivity() {
             binding.answerTextView.setText(answerText)
             setAnswerShownResult(true)
         }
+        binding.apiVersionTextView.setText(getString(R.string.api_level, Build.VERSION.SDK_INT))
     }
 
     private fun setAnswerShownResult(isAnswerShown: Boolean) {
