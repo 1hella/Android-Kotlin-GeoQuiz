@@ -18,4 +18,5 @@
     <string name="previous_button">Previous</string>
     <string name="percentage_toast">You scored %1$d out of %2$d. %3$.1f%%.</string>
     <string name="api_level">API Level %1$d</string>
+    <string name="remaining_cheats">Remaining cheats: %1$d</string>
 </resources>

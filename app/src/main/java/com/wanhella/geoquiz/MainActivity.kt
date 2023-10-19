@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
             quizViewModel.isCheater =
                 result.data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
         }
+        updateRemainingCheats()
+        if (quizViewModel.numCheats <= 0) {
+            binding.cheatButton.isEnabled = false
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             blurCheatButton()
         }
+        updateRemainingCheats()
     }
 
     private fun updateQuestion() {
@@ -115,12 +120,23 @@ class MainActivity : AppCompatActivity() {
         if (enable) {
             binding.trueButton.isEnabled = true
             binding.falseButton.isEnabled = true
-            binding.cheatButton.isEnabled = true
+            if (quizViewModel.numCheats > 0) {
+                binding.cheatButton.isEnabled = true
+            }
         } else {
             binding.trueButton.isEnabled = false
             binding.falseButton.isEnabled = false
             binding.cheatButton.isEnabled = false
         }
+    }
+
+    private fun updateRemainingCheats() {
+        binding.numCheatsTextView.setText(
+            getString(
+                R.string.remaining_cheats,
+                quizViewModel.numCheats
+            )
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
