@@ -5,6 +5,7 @@ import androidx.test.core.app.ActivityScenario.launch
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isNotEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -55,5 +56,13 @@ class MainActivityTest {
         scenario.recreate()
         onView(withId(R.id.question_text_view))
             .check(matches(withText(R.string.question_oceans)))
+    }
+
+    @Test
+    fun disablesQuestionOnAnswer() {
+        onView(withId(R.id.true_button)).perform(click())
+        onView(withId(R.id.true_button)).check(matches(isNotEnabled()))
+        onView(withId(R.id.false_button)).check(matches(isNotEnabled()))
+        onView(withId(R.id.cheat_button)).check(matches(isNotEnabled()))
     }
 }

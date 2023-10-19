@@ -77,6 +77,11 @@ class MainActivity : AppCompatActivity() {
     private fun updateQuestion() {
         val questionTextResId = quizViewModel.currentQuestionText
         binding.questionTextView.setText(questionTextResId)
+        if (quizViewModel.currentQuestionUserAnswer != null) {
+            enableAnswers(false)
+        } else {
+            enableAnswers(true)
+        }
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
@@ -87,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             userAnswer == correctAnswer -> R.string.correct_toast
             else -> R.string.incorrect_toast
         }
+        enableAnswers(false)
 
         Snackbar.make(binding.mainLayout, messageResId, Snackbar.LENGTH_SHORT)
             .show()
@@ -102,6 +108,18 @@ class MainActivity : AppCompatActivity() {
             )
             Snackbar.make(binding.mainLayout, totalMessage, Snackbar.LENGTH_LONG)
                 .show()
+        }
+    }
+
+    private fun enableAnswers(enable: Boolean) {
+        if (enable) {
+            binding.trueButton.isEnabled = true
+            binding.falseButton.isEnabled = true
+            binding.cheatButton.isEnabled = true
+        } else {
+            binding.trueButton.isEnabled = false
+            binding.falseButton.isEnabled = false
+            binding.cheatButton.isEnabled = false
         }
     }
 
