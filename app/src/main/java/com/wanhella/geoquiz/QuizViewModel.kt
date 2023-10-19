@@ -27,8 +27,8 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         get() = questionBank.size
 
     var isCheater: Boolean
-        get() = savedStateHandle[IS_CHEATER_KEY] ?: false
-        set(value) = savedStateHandle.set(IS_CHEATER_KEY, value)
+        get() = savedStateHandle[IS_CHEATER_KEY + currentIndex] ?: false
+        set(value) = savedStateHandle.set(IS_CHEATER_KEY + currentIndex, value)
 
     val currentQuestionAnswer: Boolean
         get() = questionBank[currentIndex].answer
